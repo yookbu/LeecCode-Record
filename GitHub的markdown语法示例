@@ -1,14 +1,14 @@
 # 标题一
 要创建标题，请在标题文本之前添加1-6个符号#。#您使用的数量将决定标题的大小
-'''
-# The largest heading
-## The second largest heading
-###### The smallest heading
-'''
+
+  # The largest heading
+  ## The second largest heading
+  ###### The smallest heading
+
 # 文字格式
-样式|关键字|快捷键|样例|输出
+样式 | 关键字 | 快捷键 | 样例 | 输出
 -|-|-
-加粗|** **或者__ __|command/control+b|**加粗文本**	 | ** 加粗文本 **
-斜体|* *或者_ _	 | command/control+i	 | _斜体文本_	 | 斜体文本
-删除线| ~~ ~~| 无| ~~删除线~~|删除线
-加粗且斜体|** **和_ _| 无| **这个是：_加粗且斜体_**	| _这个是_加粗且斜体
+加粗 | ** **或者__ __ | command/control+b | **加粗文本** | ** 加粗文本 **
+斜体 | * *或者_ _	 | command/control+i	| _斜体文本_ | 斜体文本
+删除线 | ~~ ~~ | 无 | ~~删除线~~ | 删除线
+加粗且斜体 | ** **和_ _ | 无 | **这个是：_加粗且斜体_**	| _这个是_加粗且斜体
