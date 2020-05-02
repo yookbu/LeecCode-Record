@@ -1,0 +1,56 @@
+# 36
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<map<int,int> > row(9);
+        vector<map<int,int> > col(9);
+        vector<map<int,int> > box(9);
+
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j] != '.'){
+                    int num = board[i][j] - '0';
+                    int box_index = (i/3)*3 + j/3;
+                    if(row[i].find(num) != row[i].end() || col[j].find(num) != col[j].end() || box[box_index].find(num) != box[box_index].end()){
+                        return false;
+                    }
+                    row[i][num]++;
+                    col[j][num]++;
+                    box[box_index][num]++;
+                }
+            }
+        }
+
+        return true;
+    }
+};
+
+
+
+# 145
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> res;
+    vector<int> postorderTraversal(TreeNode* root) {
+        postorderTraversalCore(root);
+
+        return res;
+    }
+    void postorderTraversalCore(TreeNode* root){
+        if(root == NULL){
+            return;
+        }
+        postorderTraversalCore(root->left);
+        postorderTraversalCore(root->right);
+        res.push_back(root->val);
+    }
+};
