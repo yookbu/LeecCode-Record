@@ -8,7 +8,12 @@ public:
         bool pre;
         (n & 1) != 0 ? pre = false : pre = true;
         while(n){
-            bool cur = (n & 1) != 0 ? true : false;
+            bool cur;
+            if ((n & 1) != 0) {
+                cur = true;
+            } else {
+                cur = false;
+            }
             if(cur == pre) return false;
             pre = cur;
             n = n >> 1;
