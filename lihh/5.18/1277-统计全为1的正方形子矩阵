@@ -1,0 +1,25 @@
+ //这题的关键是找到递推公式 matrix[i][j] =Math.min (matrix[i-1][j-1], Math.min(matrix[i-1][j], matrix[i][j-1]))+1;
+ //之前写成matrix[i][j] = matrix[i-1 ][j-1]+1，导致部分解不过，而且不需要额外空间，可以原地进行递推
+ public int countSquares(int[][] matrix) {
+        if(matrix == null || matrix[0]==null) {
+            return 0;
+        }
+        int row = matrix.length;
+        int line = matrix[0].length;
+       for(int i = 1; i < row; i++) {
+           for(int j = 1; j < line; j++) {
+               if(matrix[i][j] == 1) {
+                   if(matrix[i-1][j] > 0 && matrix[i][j-1] > 0 && matrix[i-1][j-1] > 0) {
+                       matrix[i][j] =Math.min (matrix[i-1][j-1], Math.min(matrix[i-1][j], matrix[i][j-1]))+1;
+                   }
+               }
+           }
+       }
+       int res = 0;
+       for(int i = 0; i < row; i++) {
+           for(int j = 0; j < line; j++) {
+               res += matrix[i][j];
+           }
+       }
+       return res;
+    }
