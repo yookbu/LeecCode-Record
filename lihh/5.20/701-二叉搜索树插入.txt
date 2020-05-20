@@ -1,0 +1,53 @@
+//我写递归会超时。。。 
+public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null) {
+            return new TreeNode(val, null,null);
+        }
+        insertBST(root, val);
+        return root;
+    }
+    private void insertBST(TreeNode tree, int val) {
+        if(tree == null) {
+            return;
+        }
+        if(tree.left==null && tree.right == null) {
+            if(val<tree.val) {
+                tree.left = new TreeNode(val, null, null);
+            }
+            if(val>tree.val) {
+                tree.right = new TreeNode(val, null, null);
+            }
+        }
+        if(tree.right == null) {
+            if(val>tree.val) {
+                 tree.right = new TreeNode(val, null, null);
+            } else {
+                insertBST(tree.left, val);
+            }
+        }
+         if(tree.left == null) {
+            if(val<tree.val) {
+                 tree.left = new TreeNode(val, null, null);
+            } else {
+                insertBST(tree.right, val);
+            }
+        }
+        if(val > tree.val) {
+            insertBST(tree.right, val);
+        }
+        if(val < tree.val) {
+            insertBST(tree.left, val);
+        }
+    }
+//最后看了个题解，写的比我简单，而且能过
+ public TreeNode insertIntoBST(TreeNode root, int val) {
+         if(root == null) return new TreeNode(val,null,null);
+    //根据BST的性质找到需要插入的点
+    if(root.val > val){
+        root.left =  insertIntoBST(root.left,val);
+    }else{
+        root.right = insertIntoBST(root.right,val);
+    }
+    return root;
+
+    }

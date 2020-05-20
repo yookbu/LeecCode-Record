@@ -1,0 +1,79 @@
+//这个是leetcode上看到的，感觉比较好理解
+public String longestPalindrome(String s) {
+    int n = s.length();
+    String res = "";
+    boolean[][] dp = new boolean[n][n];
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = i; j < n; j++) {
+            dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1]); //j - i 代表长度减去 1
+            if (dp[i][j] &&  j - i + 1 > res.length()) {
+                res = s.substring(i, j + 1);
+            }
+        }
+    }
+    return res;
+}
+
+
+//这个解法只能求长度，不能求字符串。思路是回溯，通过空间优化重复的计算。
+  boolean flag = false;
+    int mid = -1;
+    int [][]dp;
+    public String longestPalindrome(String s) {
+        if(s == null||s.length() == 0) {
+            return "";
+        }
+        int l = s.length();
+        dp = new int[l][l];
+        for(int i = 0; i < l; i++) {
+            dp[i][i] = 1;
+        }
+        max = dfs(s, 0, l-1, 0);
+        StringBuilder res = new StringBuilder();
+        if(max<2) {
+            res.append(s.charAt(s.charAt(0))) ;
+            return res.toString();
+        }
+
+
+        for(int i = mid;i < max+mid; i++) {
+            res.append(s.charAt(i));
+        }
+        return res.toString();
+    }
+    private int dfs(String s, int start, int end, int len) {
+        if(start > end) {
+            return 0;
+        }
+        if(dp[start][end]!=0) {
+            if(dp[start][end] > 0) {
+                return end-start+1;
+            } else {
+                return 0;
+            }
+
+        }
+        if(start == end) {
+            return dp[start][end];
+        }
+
+        int m1 = 0;
+        if(s.charAt(start) == s.charAt(end)) {
+            int tmp = dfs(s, start+1, end-1, start);
+            if(tmp!=0){
+                m1 = tmp+2;
+            }
+            if(!flag && tmp!=0) {
+                mid= start;
+                flag = true;
+            }
+
+        } else {
+            m1 = dfs(s, start+1, end-1, start+1);
+        }
+        int m2 = dfs(s, start, end-1, start);
+        int m3 = dfs(s,start+1, end, start+1);
+
+        return dp[start][end] = Math.max(Math.max(m1,m2), m3);
+
+    }
